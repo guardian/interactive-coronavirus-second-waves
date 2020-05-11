@@ -56,7 +56,12 @@ let area = d3.area()
 .curve(d3.curveStepBefore)
 
 const listCountries = [
-'Singapore'
+'Singapore',
+'United Kingdom',
+'Germany',
+'Spain',
+'Italy',
+'United States'
 ]
 
 d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbSVtsJ9pa6QIi1b5nkuY.json')
@@ -83,7 +88,7 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 	xScale.domain(startEndDates)
 
 
-	listCountries.map(c => {
+	listCountries.map((c,i) => {
 
 
 		let country = data.filter(d => d.CountryName == c)
@@ -91,11 +96,11 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 		places.push({country:c, cases:[]})
 
 
-		country.map((d,i) => {
+		country.map((d,j) => {
 
-			let newCases = i == 0 ? d.ConfirmedCases : d.ConfirmedCases - country[i-1].ConfirmedCases;
+			let newCases = j == 0 ? d.ConfirmedCases : d.ConfirmedCases - country[j-1].ConfirmedCases;
 
-			places[0].cases.push(
+			places[i].cases.push(
 
 			{
 				date: d.Date,
@@ -111,9 +116,9 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 
 		places.map(p => {
 
-			 p.cases.map((c,i) => {
+			 p.cases.map((c,k) => {
 
-			 	const data = p.cases.slice(i,i+7);
+			 	const data = p.cases.slice(k,k+7);
 
 		      	c.weekly = d3.sum(data , s => s.new) / data.length;
 
@@ -127,11 +132,13 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 		//window.resize();
 
 	})
-
+console.log(places)
 
 	places.forEach(d=>
 		makeChart(d)
 	)
+
+	window.resize();
 
 	
 
@@ -139,7 +146,7 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 
 
 const makeChart = (con) =>{
-console.log(con.cases)
+/*console.log(con.cases)*/
 
       let div = d3.select(".charts-container").append('div')
       .attr('class', 'gv-chart-wrapper')
@@ -222,7 +229,7 @@ console.log(con.cases)
       
       const xAxis = svg.append("g")
       .call(d3.axisBottom(xScale)
-            .ticks(3)
+            .ticks(4)
       )
       .attr('transform', 'translate(' + 0 + ',' + (marginBottom + 15) + ')')
 
