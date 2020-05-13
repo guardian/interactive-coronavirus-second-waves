@@ -56,6 +56,7 @@ let area = d3.area()
 .curve(d3.curveStepBefore)
 
 const listCountries = [
+'South Korea',
 'Singapore',
 'United Kingdom',
 'Germany',
@@ -107,7 +108,7 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 				acum: +d.ConfirmedCases,
 				new: newCases,
 				weekly:0,
-				stringency:d.StringencyIndex
+				stringency:d.StringencyIndexForDisplay
 
 
 			}
@@ -162,6 +163,38 @@ const makeChart = (con) =>{
       let avgText = div.append("p")
       .html('Week average: ' + numberWithCommas(avg.toFixed(1)))
 
+      let svgScale = div.append("svg")
+      .attr('id', 'gv-cases-chart-key' + con.country)
+      .attr("viewBox", [0, 0, chartW, 50]);
+
+      svgScale
+      .append('text')
+      .attr('transform', 'translate(0,15)')
+      .text('Stringency index')
+
+
+      svgScale
+      .append('text')
+      .attr('transform', 'translate(0,37)')
+      .text('0')
+
+	  svgScale
+      .append('text')
+      .attr('transform', 'translate(75,37)')
+      .text('100')
+
+      svgScale
+      .selectAll('rect')
+      .data([0,10,20,30,40,50,60,70,80,90,100])
+      .enter()
+      .append('rect')
+      .attr('width', 5)
+      .attr('height', 15)
+      .attr('x', (d,i) => (5 * i) + 15)
+      .attr('y', 25)
+      .attr('fill', d => colorScale(d))
+      .attr('stroke', 'white')
+
       let svg = div.append("svg")
       .attr('id', 'gv-cases-chart-' + con.country)
       .attr("viewBox", [0, 0, chartW, chartH + 15]);
@@ -188,7 +221,15 @@ const makeChart = (con) =>{
       .attr('height', 15)
       .attr('x', d => xScale(parseTime(d.date.substr(0,4) + '/' +  d.date.substr(4,2) + '/' + d.date.substr(6,2))))
       .attr('y', marginBottom)
-      .attr('fill', d => colorScale(d.stringency))
+      .attr('fill', d => {
+
+      	console.log(d.stringency)
+
+      	if(d.stringency != '') return colorScale(d.stringency)
+      		else return '#dadada'
+      	
+
+      })
       .attr('stroke', 'white')
 
       yAxis
