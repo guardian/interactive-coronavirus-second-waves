@@ -46,8 +46,10 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-import-bangtext-node": "^0.1.4",
+    "fs": "0.0.1-security",
     "gulp-replace": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "moment": "^2.26.0",
     "raw-loader": "^4.0.1",
     "request-promise": "^4.2.5",
     "uglifyjs-webpack-plugin": "^2.2.0"

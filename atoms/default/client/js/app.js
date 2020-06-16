@@ -1,6 +1,10 @@
+//import fs from 'fs'
 import * as d3 from 'd3'
 import { numberWithCommas } from 'shared/js/util'
 import $ from 'shared/js/util'
+//import fetchstringency from 'shared/js/fetchstringency'
+
+//console.log(fetchstringency)
 //import lockdownDates from 'raw-loader!./assets/lockdown-dates.csv'
 
 //console.log(lockdownDates)
@@ -56,6 +60,7 @@ let area = d3.area()
 .curve(d3.curveStepBefore)
 
 const listCountries = [
+'Iran',
 'South Korea',
 'Singapore',
 'United Kingdom',
@@ -133,7 +138,7 @@ d3.json('https://interactive.guim.co.uk/docsdata-test/1wIC9r777Spb2wJrKFr0Y2zDbS
 		//window.resize();
 
 	})
-console.log(places)
+//console.log(places)
 
 	places.forEach(d=>
 		makeChart(d)
@@ -223,7 +228,7 @@ const makeChart = (con) =>{
       .attr('y', marginBottom)
       .attr('fill', d => {
 
-      	console.log(d.stringency)
+      	//console.log(d.stringency)
 
       	if(d.stringency != '') return colorScale(d.stringency)
       		else return '#dadada'
