@@ -2,48 +2,43 @@ import axios from 'axios'
 import fs from 'fs'
 import moment from 'moment'
 
-const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2019-01-01/${moment().format('YYYY-MM-DD')}`
+const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2020-01-01/2020-06-24}`
+//const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2020-01-01/${moment().format('YYYY-MM-DD')}`
 
 async function fetchstringency(countries) {
 
   const all = (await axios.get(url)).data;
   const data = all.data
 
-   console.log('FETCH')
-
   if(data) {
-    const filteredDates = Object.keys(data).map(k => {
 
-      const currentObj = data[k]
+    let datesCountries = []
 
-      const filtered = Object.keys(currentObj)
-        .filter(key => countries.includes(key))
-        .reduce((obj, key) => {
-          obj[key] = currentObj[key]
-          return obj
-        }, {})
+    Object.keys(data).map(k => {
 
-      data[k] = filtered
+      let dateObj = {date:k, countries:[]}
 
-      return filtered
-    })
+      countries.forEach(c =>{
 
-    countries.forEach(c => {
+        if(data[k][c])
+        {
+          let countryObj = {
+            name:c,
+            stringency:data[k][c].stringency,
+            cases:data[k][c].confirmed
+          }
 
-      let countryDates = []
+          dateObj.countries.push(countryObj)
 
-      filteredDates.forEach(d => {
-        const match = d[c]
-
-        if (match) {
-          countryDates.push(match)
         }
+
       })
 
-      console.log(JSON.stringify(countryDates))
+      datesCountries.push(dateObj)
 
-      fs.writeFileSync(`./assets/stringency_data/${c === 'DEU' ? 'DEUTNP' : c}.json`, JSON.stringify(countryDates))
     })
+
+    fs.writeFileSync(`./assets/stringency_data/stringency.json`, JSON.stringify(datesCountries))
   }
 }
 

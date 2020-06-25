@@ -3,32 +3,109 @@ import fetchstringency from './fetchstringency.js'
 
 export async function render() {
 
-	const isoDict = [
-  { country: "Spain", alpha: "ESP", file: 'ESP1', tickVals: [0, 5000, 10000, 15000]},
-  { country: "Denmark", alpha: 'DNK', file: 'DNK2', tickVals: [0, 300, 600, 900 ]},
-  { country: "Finland", alpha: 'FIN', file: 'FIN1', tickVals: []},
-  { country: "Sweden", alpha: "SWE", file: 'SWE1', tickVals: [0, 800, 1600, 2400]},
-  { country: "Portugal", alpha: "PRT", file: 'PRT1', tickVals: []},
-  { country: "Norway", alpha: "NOR", file: 'NOR1', tickVals: []},
-  { country: "Netherlands", alpha: "NLD", file: 'NLD1', tickVals: [0,1500, 3000, 4500 ]},
-  { country: "Iceland", alpha: "ISL", file: 'ISL1', tickVals: []},
-  { country: "Austria", alpha: "AUT", file: 'AUT1', tickVals: [0, 500, 1000, 1500]},
-  { country: "Germany", alpha: "DEUTNP", file: 'DEUTNP1', tickVals: [0, 6000, 12000, 18000]},
-  { country: "US", alpha: "USA", file: 'USA_cdc', tickVals: [0, 20000, 40000, 60000]},
-  { country: 'Belgium', alpha: 'BEL', file: 'BEL1', tickVals: [0, 1200, 2400, 3600 ]},
-  { country: 'Italy', alpha: 'ITA', file: 'ITA_economist', tickVals: [0, 6000, 12000, 18000]},
-  { country: 'France', alpha: 'FRA', file: 'FRA_economist', tickVals: [0, 6000, 12000, 18000]},
-  { country: 'UK', alpha: 'GBR', file: 'UK-CB', tickVals: [0, 8000, 16000, 24000]}
+  const isoDict = [
+  {country:"Spain",alpha:"ESP"},
+  {country:"Colombia",alpha:"COL"},
+  {country:"Chile",alpha:"CHL"},
+  {country:"China",alpha:"CHN"},
+  {country:"Iraq",alpha:"IRQ"},
+  {country:"Ukraine",alpha:"UKR"},
+  {country:"Argentina",alpha:"ARG"},
+  {country:"South Africa",alpha:"ZAF"},
+  {country:"US",alpha:"USA"},
+  {country:"India",alpha:"IND"},
+  {country:"Brazil",alpha:"BRA"},
+  {country:"Portugal",alpha:"PRT"},
+  {country:"Pakistan",alpha:"PAK"},
+  {country:"Poland",alpha:"POL"},
+  {country:"United Kingdom",alpha:"GBR"},
+  {country:"Belarus",alpha:"BLR"},
+  {country:"Mexico",alpha:"MEX"},
+  {country:"Italy",alpha:"ITA"},
+  {country:"Dominican Republic",alpha:"DOM"},
+  {country:"United Arab Emirates",alpha:"ARE"},
+  {country:"Ecuador",alpha:"ECU"},
+  {country:"Philippines",alpha:"PHL"},
+  {country:"Egypt",alpha:"EGY"},
+  {country:"France",alpha:"FRA"},
+  {country:"Panama",alpha:"PAN"},
+  {country:"Afghanistan",alpha:"AFG"},
+  {country:"Kuwait",alpha:"KWT"},
+  {country:"Russia",alpha:"RUS"},
+  {country:"Oman",alpha:"OMN"},
+  {country:"Netherlands",alpha:"NLD"},
+  {country:"Belgium",alpha:"BEL"},
+  {country:"Sweden",alpha:"SWE"},
+  {country:"Germany",alpha:"DEU"},
+  {country:"Canada",alpha:"CAN"},
+  {country:"Saudi Arabia",alpha:"SAU"},
+  {country:"Turkey",alpha:"TUR"},
+  {country:"Ireland",alpha:"IRL"},
+  {country:"Qatar",alpha:"QAT"},
+  {country:"Switzerland",alpha:"CHE"},
+  {country:"Bangladesh",alpha:"BGD"},
+  {country:"Peru",alpha:"PER"},
+  {country:"Iran",alpha:"IRN"},
+  {country:"Indonesia",alpha:"IDN"},
+  {country:"Singapore" ,alpha:"SGP"},
+  {country:"Bolivia" ,alpha:"BOL"}
+  ]
 
 
 
-]
 
-const ourcountries = ["Spain", "Denmark", "Sweden", "Netherlands", "Austria", "Germany", "US", 'Belgium', 'Italy', 'France',"UK"]
+
+  const ourcountries = [
+"Spain",
+"Colombia",
+"Chile",
+"China",
+"Iraq",
+"Ukraine",
+"Argentina",
+"South Africa",
+"US",
+"India",
+"Brazil",
+"Portugal",
+"Pakistan",
+"Poland",
+"United Kingdom",
+"Belarus",
+"Mexico",
+"Italy",
+"Dominican Republic",
+"United Arab Emirates",
+"Ecuador",
+"Philippines",
+"Egypt",
+"France",
+"Panama",
+"Afghanistan",
+"Kuwait",
+"Russia",
+"Oman",
+"Netherlands",
+"Belgium",
+"Sweden",
+"Germany",
+"Canada",
+"Saudi Arabia",
+"Turkey",
+"Ireland",
+"Qatar",
+"Switzerland",
+"Bangladesh",
+"Peru",
+"Iran",
+"Indonesia",
+"Singapore",
+"Bolivia"
+  ]
 
 	const codes = isoDict.filter(d => ourcountries.includes(d.country))
 
-	fetchstringency(codes.map(c => c.alpha === 'DEUTNP' ? 'DEU' : c.alpha))
+	fetchstringency(codes.map(c => c.alpha))
 
-    return mainHTML;
+  return mainHTML;
 } 

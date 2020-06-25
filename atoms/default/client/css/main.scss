@@ -1,7 +1,7 @@
 @import "fonts";
 @import "mq";
 @import "palette";
-// @import "enhancer";
+@import "enhancer";
 
 .interactive-atom {
     margin: 0;
@@ -24,42 +24,151 @@
 
 }
 
-.gv-chart-wrapper{
+#interactive-slot-1,#interactive-slot-2,#interactive-slot-3,#interactive-slot-4,#interactive-slot-5,#interactive-slot-6{
 
-	margin-right: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 12px;
 
-/* 	@include mq($from: 100px, $until: 400px) {
-		flex-basis: 100%;
-	}
-	@include mq($from: 400px, $until: 899px) {
-		flex-basis: calc(33% - 5px);
-	}
-	@include mq($from: 900px) {
-		flex-basis: calc(50% - 5px);
-	} */
 
-	h3{
-		font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
-		font-weight: 900;
-		margin-bottom: 1px;			    
-	}
-	
-	text{
-		@include fs-textSans(2);
-		margin-bottom: 3px;
-		margin: 0;
-		margin-top: 6px;
-		fill:$neutral-46;
-	}
+	width: 100%;
 
-	.midtext{
-		@include fs-textSans(2);
-	}
-	
-	p{
-		@include fs-textSans(2);
-		margin-bottom: 3px;
-		margin: 0px;
-	}
+	//min-width: 860px;
+
+	//border:	1px solid red;
 
 }
+
+.gv-chart-wrapper{
+
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 12px;
+
+
+
+ 
+	@include mq($from: 100px, $until: 499px) {
+	            flex-basis: calc(50% - 5px);
+		        margin-right: 5px;
+	}
+
+	@include mq($from: 500px, $until: 700px) {
+	            flex-basis: calc(33% - 5px);
+		        margin-right: 5px;
+	}
+
+	@include mq($from: 700px) {
+		        flex-basis: calc(33% - 5px);
+		        margin-right: 5px;
+	}  
+ 
+
+	h3{
+		    	margin-top: 12px;
+		    	font-size: 18px;
+				line-height: 12px;
+				font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
+				font-weight: 900;
+				margin-bottom: 6px;
+				width: 100%;
+				line-height: 20px;
+		    
+    		}
+
+
+   	.tick-text{
+   		font-size: 12px;
+   		fill: #999999;
+   		//transform:translate(0,-5px);
+	    font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+   	}
+
+   	.key-text{
+   		font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+   	}
+
+   	.subhead{
+   		@include fs-textSans(2);
+			    margin-bottom: 3px;
+			    width: 100%;
+   	}
+
+   	.tick-line{
+   		stroke: #999999;
+    }
+
+    .baseline{
+    	stroke-width:1;
+        stroke:#000;
+        fill:'none';
+    }
+
+   	.line-chart{
+   		stroke: #333;
+        stroke-width: 2;
+        fill: none;
+
+   	}
+
+   	.area-chart{
+   		fill:#eaeaea;
+   	}
+
+   	.midline{
+   		stroke-width: 1;
+        stroke-dasharray: 1,2;
+        stroke: #999999;
+        fill: 'none';
+
+
+   	}
+}
+
+.key-container{
+	width: 100%;
+
+	display: flex;
+
+	@include fs-textSans(2);
+	
+	p{
+		margin-right: 6px;
+	}
+
+	.key{
+		margin-right: 6px;
+	}
+}
+
+.sm-tooltip-wrapper{
+	position: absolute;
+
+	max-width: 100px;
+}
+
+.sm-tooltip{
+		//pointer-events: none;
+		//width:90px;
+		height: max-content;
+		padding:4px;
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid #666666;
+		color: #666666;
+		border-top: 1px solid #666666;
+		position: relative;
+		z-index: 100000;
+
+		display:none;
+
+		font-size: 12px;
+			line-height: 18px;
+			font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			margin-bottom: 3px;
+			width: 100%;
+
+		
+		
+	
+	}
+

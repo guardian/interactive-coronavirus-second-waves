@@ -1,0 +1,302 @@
+@import "fonts";
+@import "mq";
+@import "palette";
+@import "enhancer";
+
+.interactive-atom {
+    margin: 0;
+    padding: 0;
+}
+
+.interactive-wrapper{
+
+	position: relative;
+
+	background: white;
+
+	width: 100%;
+
+}
+
+
+.chartline{
+   		stroke-width: 1;
+        stroke-dasharray: 1,2;
+        stroke: #999999;
+        fill: 'none';
+
+
+}
+
+.yaxis {
+
+	text{
+		font-size: 16px;
+	    line-height: 24px;
+	    font-family: "Guardian Text Egyptian Web",Georgia,serif;
+	    fill: #767676;
+	}
+
+	line{
+		stroke: #eaeaea;
+	}
+    
+}
+
+
+.xaxis{
+	.domain{
+		color: #333;
+
+		stroke-width:2px;
+	}
+
+	text{
+		font-size: 16px;
+		line-height: 24px;
+		font-family: "Guardian Text Egyptian Web",Georgia,serif;
+		fill: #767676;
+		text-anchor: middle;
+	}
+}
+
+
+.arrow-container-yaxis{
+
+	.arrow{
+		display:flex;
+	}
+
+	svg{margin-right: 6px;}
+
+	.xaxis{
+		float: right;
+	}
+}
+
+.arrow-container-xaxis{
+	display: flex;
+	justify-content: space-between;
+
+	margin-bottom: 12px;
+}
+
+.arrow-container-xaxis-left{
+	display: flex;
+
+	flex-direction: row-reverse;
+
+	align-items:center;
+
+	.arrow2{
+/* 		transform: scale(-1, -2);
+		transform:translate(0,0px); */
+		margin-right: 2px;
+		//height:1px;
+	}
+
+	p{
+		height:20px;
+		margin:0;
+	}
+
+
+}
+
+.arrow-container-xaxis-right{
+	display: flex;
+
+	flex-direction: row-reverse;
+
+	align-items:center;
+
+	.arrow{
+		margin-right: 10px;
+		
+	}
+
+	p{
+		height:20px;
+		margin:0;
+		margin-right: 2px;
+
+	}
+
+
+}
+
+.second-peak-standfirst {
+  @include fs-headline(3);
+  font-weight: 200;
+  width: 100%;
+  max-width: 280px;
+
+  @include mq(tablet) {
+  max-width: 480px;
+  font-size: 1.25rem;
+  line-height: 25px;
+  }
+
+  margin-bottom: 12px;
+}
+
+.cautious-rise{
+	color:#00b2ff;
+	font-weight: 500;
+}
+.cautious-fall{
+	color:#ed6300;
+	font-weight: 500;
+}
+.rising-lockdown{
+	color:#ff1921;
+	font-weight: 500;
+}
+.relaxed-rising{
+	color:#91b52d;
+	font-weight: 500;
+}
+.relaxed-recovering{
+	color:#004e3a;
+	font-weight: 500;
+}
+.flattening-curve{
+	color:#951d7a;
+	font-weight: 500;
+}
+
+.tooltip{
+		pointer-events: none;
+		min-width:150px;
+		height: max-content;
+		padding:8px;
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid #333;
+		color: #333333;
+		border-top: 1px solid #333;
+		position: absolute;
+		z-index: 100000;
+
+		opacity: 0;
+
+		//display: flex;
+		//flex-direction: column;
+
+		@include mq(mobile){
+			//position: fixed;
+			//width: calc(100% - 50px);
+			//bottom: 0%;
+		}
+		@include mq(desktop){
+			//max-width: 200px;
+			//position: absolute;
+			//width: 20%;
+		}
+
+		&.over{
+			opacity: 1;
+		}
+
+
+		.tooltip-country{
+			margin-top: 6px;
+		    	font-size: 18px;
+				line-height: 22px;
+				font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
+				font-weight: 900;
+				margin-bottom: 6px;
+				width: 100%;
+		}
+
+		.tooltip-variation, .tooltip-stringency{
+			font-size: 13px;
+			line-height: 18px;
+			font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			margin-bottom: 3px;
+			width: 100%;
+		}
+		
+			
+		
+	
+	}
+
+
+
+	.annotation{
+		position: absolute;
+		font-size: 13px;
+		line-height: 18px;
+		font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		max-width: 90px;
+
+		opacity: 1;
+	}
+
+	.ann-arrow{
+		position: absolute;
+		opacity: 0;
+	}
+
+	.sc-key{
+		
+
+		font-size: 13px;
+		line-height: 18px;
+		font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		margin-bottom: 3px;
+		width: 100%;
+
+		margin-bottom: 12px;
+
+	}
+
+
+
+	.key-group{
+
+		display: flex;
+		flex-wrap: wrap;
+
+		justify-content:flex-start;
+
+		max-width: 620px;
+
+	}
+
+	.group1{
+		border-bottom: 1px dotted #bababa;
+		margin-bottom: 12px;
+	}
+
+	.sc-key-wrapper{
+		display: flex;
+		flex-direction: row;
+
+		p{
+			margin: 0;
+			line-height: 0.9;
+
+			margin-right: 12px;
+			margin-bottom: 12px;
+		}
+	}
+
+
+	.key-color{
+		width: 8px;
+		height: 12px;
+
+		margin-right: 5px;
+
+		background: red;
+	}
+
+
+	#c1{background: #ffe500;}
+	#c2{background: #00b2ff;}
+	#c3{background: #ed6300;}
+	#c4{background: #951d7a;}
+	#c5{background: #ff1921;}
+	#c6{background: #004e3a;}
+	
