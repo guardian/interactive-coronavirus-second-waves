@@ -111,7 +111,7 @@ let arrowRight = arrowX
 arrowLeft
 .append('p')
 .attr('class','text2')
-.html('No meassures')
+.html('No measures')
 
 arrowLeft
 .append('div')
@@ -375,11 +375,20 @@ function wrap(text, width) {
 
 const makeCountry = (alpha, countryData) => {
 
+            
+
   let sumThisWeek = d3.sum(countryData.slice(7, 14), s => s.new)
   let sumLastWeek = d3.sum(countryData.slice(0, 7), s => s.new)
 
 
+
+
   let variation = ((sumThisWeek - sumLastWeek) / sumThisWeek) * 100;
+if(alpha == 'PRT')
+            {
+               console.log(countryData, sumThisWeek, ' -- ', sumLastWeek , '--', variation)
+            }
+
 
   let stringency = countryData[countryData.length-1].stringency;
 

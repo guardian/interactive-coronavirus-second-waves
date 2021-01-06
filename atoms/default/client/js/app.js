@@ -28,8 +28,7 @@ let startEndDates;
 let marginBottom = 30;
 
 let xScale = d3.scaleTime()
-.range([7, width-7])
-.domain([0,100])
+.range([0, width])
 
 let colorScale = d3.scaleLinear()
 .domain([0,25,50,75,100])
@@ -54,116 +53,27 @@ let area = d3.area()
 
 let countries = [];
 
+const isoDict = [
 
-
-
-
-
-    const isoDict = [
-    {country:"Bolivia",group:"",alpha:"BOL"},
-    {country:"Argentina",alpha:"ARG"},
-    {country:"Colombia",alpha:"COL"},
-    {country:"Iraq",alpha:"IRQ"},
-    {country:"Philippines",alpha:"PHL"},
-    {country:"Panama",alpha:"PAN"},
-    {country:"Kuwait",alpha:"KWT"},
-    {country:"China",alpha:"CHN"},
-    {country:"Oman",alpha:"OMN"},
-
-    {country:"Ecuador",alpha:"ECU"},
-    {country:"Qatar",alpha:"QAT"},
-    {country:"Peru",alpha:"PER"},
-    
-
-    {country:"Dominican Republic",alpha:"DOM"},
-    {country:"Chile",alpha:"CHL"},
-    {country:"India",alpha:"IND"},
-    {country:"South Africa",alpha:"ZAF"},
-    {country:"Portugal",alpha:"PRT"},
-    {country:"Brazil",alpha:"BRA"},
-    {country:"Egypt",alpha:"EGY"},
-
-    {country:"Mexico",alpha:"MEX"},
-    {country:"Russia",alpha:"RUS"},
-    {country:"United Kingdom",alpha:"GBR"},
     {country:"Ireland",alpha:"IRL"},
-    {country:"Afghanistan",alpha:"AFG"},
-
-    {country:"Germany",alpha:"DEU"},
-    {country:"Ukraine",alpha:"UKR"},
-    {country:"US",alpha:"USA"},
-    {country:"Switzerland",alpha:"CHE"},
-    {country:"Bangladesh",alpha:"BGD"},
-    {country:"France",alpha:"FRA"},
-    {country:"Sweden",alpha:"SWE"},
-    {country:"Iran",alpha:"IRN"},
-    {country:"Indonesia",alpha:"IDN"},
-    {country:"Saudi Arabia",alpha:"SAU"},
-
-    {country:"Turkey",alpha:"TUR"},
-    {country:"Belgium",alpha:"BEL"},
-    {country:"Canada",alpha:"CAN"},
-    {country:"Poland",alpha:"POL"},
-    {country:"Pakistan",alpha:"PAK"},
-    {country:"United Arab Emirates",alpha:"ARE"},
-    {country:"Belarus",alpha:"BLR"},
-    {country:"Italy",alpha:"ITA"},
-    {country:"Spain",alpha:"ESP"},
+    {country:"Bolivia",group:"",alpha:"BOL"},
+    {country:"Israel",group:"",alpha:"ISR"},
+    {country:"United Kingdom",alpha:"GBR"},
     {country:"Singapore",alpha:"SGP"},
-    {country:"Netherlands",alpha:"NLD"}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  ]
+    {country:"Lebanon" ,alpha:"LBN"},
+    {country:"South Africa",alpha:"ZAF"},
+    {country:"Czechia" ,alpha:"CZE"},
+    {country:"Honduras" ,alpha:"HND"},
+    {country:"Portugal",alpha:"PRT"}
+]
 
 
 loadJson('<%= path %>/stringency_data/stringency.json')
 .then(casesRaw => {
 
-     
+      casesRaw[0].countries.map(entry => {
 
-      isoDict.map(entry => {
-
-            let alpha = entry.alpha
+            let alpha = entry.name
 
             let countryObj = []
 
@@ -241,22 +151,6 @@ loadJson('<%= path %>/stringency_data/stringency.json')
               countryObj[i].weekly = d3.sum(weekData , s => s.new) / 7;
               
             }
-
-           /* countryObj.map((date,i) => {
-
-                  let weekData = countryObj.slice(i,i+7);
-
-                  console.log(weekData)
-
-
-                  let weekly = d3.sum(weekData , s => s.new ) / weekData.length;
-
-                  date.weekly = weekly;
-
-
-                  console.log(date.weekly)
-            })*/
-
             let startEndDates = d3.extent(countryObj, d => d.date)
 
             xScale.domain(startEndDates)
@@ -551,7 +445,7 @@ Relaxed and recovering  Below   70                    Below 0*/
             .attr("height", height)
 
 
-            svg.append('g')
+           /* svg.append('g')
             .selectAll('rect')
             .data(countryObj)
             .enter()
@@ -560,9 +454,9 @@ Relaxed and recovering  Below   70                    Below 0*/
             .attr('x', d => xScale(d.date) - (width / day)) 
             .attr('y', d => yScale(d.new))
             .attr('width', width / day)
-            .attr('height', d => height - marginBottom - yScale(d.new))
+            .attr('height', d => height - marginBottom - yScale(d.new))*/
 
-
+/*
               svg.append('g')
               .selectAll('rect')
               .data(countryObj)
@@ -575,24 +469,21 @@ Relaxed and recovering  Below   70                    Below 0*/
               .attr('opacity', 0)
               .on('mouseover', (d,i) => manageOver(d.country + i, alpha, d.new, ' Stringency: ' + formatDecimalComma(d.stringency)) )
               .on('mouseout', (d,i) => manageOut(d.country + i, alpha))
-              .on('mousemove', d => manageMove(alpha))
+              .on('mousemove', d => manageMove(alpha))*/
             
+            console.log(countryObj)
 
             svg.append("g")
             .selectAll('rect')
             .data(countryObj)
             .enter()
             .append('rect')
-            .attr('width', 5)
+            .attr('width', width / countryObj.length)
             .attr('class', d => d.date)
             .attr('height', 10)
-            .attr('x', d => xScale(d.date) - (width / day)) 
+            .attr('x', d => xScale(d.date)) 
             .attr('y', height - marginBottom)
-            .attr('fill', d => {
-
-                  return colorScale(d.stringency)
-            
-            })
+            .attr('fill', d => colorScale(d.stringency))
 
             const yAxis = svg.append("g")
 
@@ -623,17 +514,34 @@ Relaxed and recovering  Below   70                    Below 0*/
             .append('text')
             .text(numberWithCommas(midPoint))
             .attr('transform', 'translate(0,' + (yScale(midPoint) - 5) + ')')
-            .attr('midtext')
+            .attr('class','midtext')
 
             const xAxis = svg.append("g")
             .call(d3.axisBottom(xScale)
-                  .ticks(d3.timeMonth)
+                  .ticks(5)
                   .tickFormat(d3.timeFormat("%b"))
             )
             .attr('transform', 'translate(' + 0 + ',' + (height - marginBottom + 7) + ')')
 
-            xAxis.selectAll(".tick text")
+            let tickTexts = xAxis.selectAll(".tick text")
             .attr('class', 'tick-text')
+
+            d3.select(tickTexts.nodes()[0]).attr('text-anchor', 'start')
+            d3.select(tickTexts.nodes()[4]).attr('text-anchor', 'end')
+
+            /*texts.nodes().map((n,i) => {
+    if(i == 0)
+    {
+      n.innerHTML = n.innerHTML + 'pp and over';
+      n.setAttribute('dx' , '35px')
+    }
+    if(i == texts.nodes().length-1)
+    {
+      n.innerHTML = n.innerHTML + 'pp and over';
+      n.setAttribute('dx' , '-35px')
+    }
+    
+  })*/
             
             xAxis.selectAll(".tick line")
             .attr('class', 'tick-line')

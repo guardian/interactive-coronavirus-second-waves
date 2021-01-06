@@ -2,7 +2,7 @@ import axios from 'axios'
 import fs from 'fs'
 import moment from 'moment'
 
-const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2020-01-01/2020-06-24}`
+const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2020-01-01/2021-01-04}`
 //const url = `https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/2020-01-01/${moment().format('YYYY-MM-DD')}`
 
 async function fetchstringency(countries) {
