@@ -233,12 +233,12 @@ const makeChart = (alpha, countryObj) =>{
 
     subhead.append("span")
     .attr('class', 'gv-variation')
-    .html(sign + formatDecimalComma(variation) + '% vs last week' )
+    .html(sign + formatDecimalComma(variation) + '% vs two weeks ago' )
   }
   else{
     subhead.append("span")
     .attr('class', 'gv-variation')
-    .html(sign + formatDecimalComma(variation) + '% vs last week' )
+    .html(sign + formatDecimalComma(variation) + '% vs two weeks ago' )
   }
 
   
