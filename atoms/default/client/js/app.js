@@ -13,8 +13,6 @@ const atomEl = d3.select('.charts-container').node();
 let width = isMobile ? (atomEl.getBoundingClientRect().width / 2) -10: (atomEl.getBoundingClientRect().width / 3) - 10;
 let height =  width * 2.5 / 5;
 
-console.log(atomEl.getBoundingClientRect().width, width, height)
-
 const parseTime = d3.timeParse("%Y-%m-%d");
 
 const now = parseTime(moment().format('YYYY-MM-DD'))
@@ -203,7 +201,7 @@ const makeChart = (alpha, countryObj) =>{
   let stringency = countryObj[countryObj.length-1].stringency;
 
   let sumThisWeek = d3.sum(countryObj.slice(countryObj.length-7, countryObj.length), s => s.new)
-  let sumLastWeek = d3.sum(countryObj.slice(countryObj.length-14, countryObj.length-7), s => s.new)
+  let sumLastWeek = d3.sum(countryObj.slice(countryObj.length-21, countryObj.length-14), s => s.new)
 
   let variation = ((sumThisWeek - sumLastWeek) / sumLastWeek) * 100;
 
